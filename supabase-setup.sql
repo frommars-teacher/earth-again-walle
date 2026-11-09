@@ -9,7 +9,7 @@ create table public.earth_classes(
  id uuid primary key default gen_random_uuid(),
  teacher_id uuid not null references auth.users(id),
  title text not null check(length(trim(title)) between 1 and 60),
- code text not null unique default substring(replace(gen_random_uuid()::text,'-',''),1,12),
+ code text not null unique default ((100000 + floor(random()*900000))::integer::text),
  accepting boolean not null default true,
  created_at timestamptz not null default now()
 );
